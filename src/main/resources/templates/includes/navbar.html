@@ -17,8 +17,14 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-success text-white " th:href="@{/home}" th:text="Home"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-success text-white " th:href="@{/add-product}" th:text="Ajout-produit"></a>
+        </li>
       <li class="nav-item">
-        <a class="nav-link btn btn-outline-success text-white " th:href="@{/profile}" th:text="${user.firstName + ' ' + user.lastName}"></a>
+        <a class="nav-link btn btn-outline-success text-white " th:href="@{/profil}" th:text="${user.firstName + ' ' + user.lastName}"></a>
       </li>
       <li class="nav-item">
           <form th:action="@{/logout}" method="post">

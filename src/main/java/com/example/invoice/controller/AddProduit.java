@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/home")
-public class ProductController {
+@RequestMapping("/add-product")
+public class AddProduit {
     @Autowired
     UserRepository userRepository;
 
@@ -26,36 +26,30 @@ public class ProductController {
     ProduitRepository produitRepository;
     @Autowired
     UserDetailsServiceImpl userDetailsServiceImpl;
-    @GetMapping
-    public String displayUserDetails(Model model){
-        Optional<User> user = Optional.ofNullable(userDetailsServiceImpl.getCurrentUser());
-        List<Produit> produits = produitRepository.findAll();
 
+    @GetMapping
+    public String displayUserDetails(Model model) {
+        Optional<User> user = Optional.ofNullable(userDetailsServiceImpl.getCurrentUser());
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
-         model.addAttribute("produits", produits);
-            return "home";
+            return "add-product";
         } else {
             // Gérer l'absence de l'utilisateur
             return "error";
         }
     }
-    @PostMapping("/add-product")
+
+    @PostMapping
     public String AjoutProduit(@ModelAttribute Produit produit, Model model) {
 
-//        String name = produit.getName();
-//        String description = produit.getDescription();
-//        double prixHt = produit.getPrixHt();
-//        Produit produit = new Produit(name,description,prixHt);
         produitRepository.save(produit);
 
         Optional<User> user = Optional.ofNullable(userDetailsServiceImpl.getCurrentUser());
-        List<Produit> produits = produitRepository.findAll();
 
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
-            model.addAttribute("produits", produits);
-            return "home";
+
+            return "redirect:/home";
         } else {
             // Gérer l'absence de l'utilisateur
             return "error";
