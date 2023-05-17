@@ -36,13 +36,21 @@ public class Facture {
 
 
     @OneToMany(mappedBy = "facture")
-    private List<FactureProduit> produits = new ArrayList<>();
+    private List<FactureProduit> factureProduits = new ArrayList<>();
 
     @PrePersist
     private void onCreate() {
         // Calculer la date d'échéance comme un mois après la date de création
-        if (dateCreation != null) {
             dateEcheance = dateCreation.plusMonths(1);
-        }
+
     }
+
+    public List<FactureProduit> getFactureProduits() {
+        return factureProduits;
+    }
+
+    public void setFactureProduits(List<FactureProduit> factureProduits) {
+        this.factureProduits = factureProduits;
+    }
+
 }
