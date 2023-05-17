@@ -54,7 +54,12 @@ public class WebSecurityConfig {
                             .defaultSuccessUrl("/home");
                 })
                 .logout(logout -> {
-                    logout.logoutUrl("/logout");
+                    logout.logoutUrl("/logout")
+                            .logoutSuccessUrl("/login")
+                            .permitAll();
+//                     .logoutSuccessUrl("/login"); // L'URL vers laquelle rediriger après la déconnexion
+//                            .invalidateHttpSession(true) // Invalider la session HTTP après la déconnexion
+//                            .deleteCookies("JSESSIONID");
                 })
                 .build();
     }

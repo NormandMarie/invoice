@@ -27,11 +27,11 @@ public class ProductController {
     @GetMapping
     public String displayUserDetails(Model model){
         Optional<User> user = Optional.ofNullable(userDetailsServiceImpl.getCurrentUser());
-//        List<Produit> produits = produitRepository.findAll();
+        List<Produit> produits = produitRepository.findAll();
 
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
-//            model.addAttribute("produits", produits);
+         model.addAttribute("produits", produits);
             return "home";
         } else {
             // Gérer l'absence de l'utilisateur

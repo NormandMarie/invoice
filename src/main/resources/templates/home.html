@@ -7,34 +7,23 @@
     <title>home</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Mon Application</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <span class="nav-link" th:text="${user.firstName + ' ' + user.lastName}">Bonjour</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link" th:text="${user.email}"></span>
-            </li>
+
+<div th:include="includes/navbar"></div>
+
+<!-- Carte Bootstrap -->
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Produits</h5>
+        <ul class="list-group">
+            <th:block th:each="produit : ${produits}">
+                <li class="list-group-item">
+                    <span th:text="${produit.name}"></span>
+                    <p th:text="Description +${produit.description}"></p>
+                    <span class="float-right" th:text=" prixHt +${produit.prixHt} "></span>
+                </li>
+            </th:block>
         </ul>
-
     </div>
-</nav>
-
-<!--&lt;!&ndash; Carte Bootstrap &ndash;&gt;-->
-<!--<div class="card">-->
-<!--    <div class="card-body">-->
-<!--        <h5 class="card-title">Produits</h5>-->
-<!--        <ul class="list-group">-->
-<!--            <th:block th:each="produit : ${produits}">-->
-<!--                <li class="list-group-item">-->
-<!--                    <span th:text="${produit.name}"></span>-->
-<!--                    <span class="float-right" th:text="${produit.prixHt}"></span>-->
-<!--                </li>-->
-<!--            </th:block>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
+</div>
 </body>
 </html>
